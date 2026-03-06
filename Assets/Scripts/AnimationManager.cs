@@ -10,6 +10,6 @@ public class AnimationManager : MonoBehaviour
     }
     public void PlayAnimation()
     {
-        animator.Play("Sad");
+        animator.Play("Loading");
     }
 }
