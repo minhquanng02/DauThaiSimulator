@@ -11,8 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform panel;
     [SerializeField] private RectTransform pauseBtn;
 
-    [SerializeField] private float panelStart = -155f;
-    [SerializeField] private float pauseBtnStart = 35f;
+    //[SerializeField] private float panelStart = -155f;
+    //[SerializeField] private float pauseBtnStart = 35f;
 
     [SerializeField] private float duration = 1f;
 
@@ -24,20 +24,20 @@ public class UIManager : MonoBehaviour
        
     }
 
-    private void Start()
-    {
-         panelPosY = panel.anchoredPosition.y;
-        pauseBtnPosX = pauseBtn.anchoredPosition.x;
+    //private void Start()
+    //{
+    //     panelPosY = panel.anchoredPosition.y;
+    //    pauseBtnPosX = pauseBtn.anchoredPosition.x;
 
-        panel.anchoredPosition = new Vector2(panel.anchoredPosition.x, panelStart);
-        pauseBtn.anchoredPosition = new Vector2(pauseBtnStart, pauseBtn.anchoredPosition.y);
+    //    panel.anchoredPosition = new Vector2(panel.anchoredPosition.x, panelStart);
+    //    pauseBtn.anchoredPosition = new Vector2(pauseBtnStart, pauseBtn.anchoredPosition.y);
 
-    }
+    //}
 
-    public void OnPressPlay()
-    {
+    //public void OnPressPlay()
+    //{
 
-        panel.DOAnchorPosY(panelPosY, duration).SetEase(Ease.InOutCubic);
-        pauseBtn.DOAnchorPosX(pauseBtnPosX, duration).SetEase(Ease.InOutCubic);
-    }
+    //    panel.DOAnchorPosY(panelPosY, duration).SetEase(Ease.InOutCubic);
+    //    pauseBtn.DOAnchorPosX(pauseBtnPosX, duration).SetEase(Ease.InOutCubic);
+    //}
 }

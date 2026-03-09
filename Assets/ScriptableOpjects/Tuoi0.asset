@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7acf595c99e4e43a3b2ae3f4de0f42, type: 3}
+  m_Name: Tuoi0
+  m_EditorClassIdentifier: Assembly-CSharp::RateOption
+  title: "B\u1EA1n sinh ra trong gia \u0111\xECnh"
+  items:
+  - itemName: 
+    weight: 30
+    optionName: "Gi\xE0u"
+  - itemName: 
+    weight: 30
+    optionName: "Ngh\xE8o"
+  - itemName: 
+    weight: 30
+    optionName: "B\xECnh th\u01B0\u1EDDng"
