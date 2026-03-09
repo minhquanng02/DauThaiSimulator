@@ -5,15 +5,13 @@ using System.Linq;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
-    public WheelUI wheelUI;
-    public RateOption rateOption;
-    public GameObject optionPanel;
-
-    
-    [SerializeField] public List<GameObject> fillObject;
-
-    [SerializeField] public RectTransform arrow;
-
+    [Header("Class")]
+    [SerializeField] public RateOption rateOption;
+    [SerializeField] private WheelUI wheelUI;
+    [SerializeField] private GameObject optionPanel;
+    [SerializeField] private UIManager uIManager;
+    [SerializeField] private CharacterData characterData;
+    [SerializeField] private CharacterDataUI characterDataUI;
 
     public void OnClick()
     {
@@ -23,6 +21,15 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void GameStart()
+    {
+        uIManager.ShowPanel(uIManager.agePanel);
+        wheelUI.CreateAge();
+    }
 
-
+    public void NewStat()
+    {
+        characterDataUI.age.text = characterData.age.ToString();
+        
+    }
 }
