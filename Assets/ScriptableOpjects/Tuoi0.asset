@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RateOption
   title: "B\u1EA1n sinh ra trong gia \u0111\xECnh"
   items:
-  - itemName: 
-    weight: 30
-    optionName: "Gi\xE0u"
-  - itemName: 
-    weight: 30
-    optionName: "Ngh\xE8o"
-  - itemName: 
-    weight: 30
-    optionName: "B\xECnh th\u01B0\u1EDDng"
+  - itemName: "Gia \u0111\xECnh lao \u0111\u1ED9ng ngh\xE8o"
+    weight: 50
+    optionName: "Gia \u0111\xECnh lao \u0111\u1ED9ng ngh\xE8o"
+  - itemName: "Gia \u0111\xECnh trung b\xECnh"
+    weight: 35
+    optionName: "Gia \u0111\xECnh trung b\xECnh"
+  - itemName: "Gia \u0111\xECnh kh\xE1 gi\u1EA3"
+    weight: 15
+    optionName: "Gia \u0111\xECnh kh\xE1 gi\u1EA3"

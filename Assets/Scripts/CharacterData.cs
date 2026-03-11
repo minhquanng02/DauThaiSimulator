@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class CharacterData : MonoBehaviour
+public class CharacterData : MonoBehaviour 
 {
+    public string characterID;
     [Header("Top")]
-    public int age;
+    public int age = 0;
     public string gender;
     public string job;
 
@@ -12,7 +13,7 @@ public class CharacterData : MonoBehaviour
     public int appearance;
     public int mirrage;
     public int stress;
-    public int disipline;
+    public int discipline;
     public int risk;
 
     [Header("Right")]
@@ -21,9 +22,9 @@ public class CharacterData : MonoBehaviour
     public int finance;
     public int social;
     public int reputation;
-    public int dept;
+    public int debt;
 
     [Header("Hide")]
     public int luck;
-
 }
+    

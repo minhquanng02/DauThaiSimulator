@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 using static UnityEngine.Rendering.DebugUI;
@@ -30,7 +31,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public RectTransform arrow;
 
     [Header("Value")]
-    private float maxduration = 0.5f;
+    private float maxDuration = 0.15f;
     private float minDuration = 0.2f;
 
     [Header("Core UI")]
@@ -51,18 +52,18 @@ public class UIManager : MonoBehaviour
         panel.localScale = Vector3.zero;
         cg.alpha = 0;
 
-        panel.DOScale(1f, maxduration)
+        panel.DOScale(1f, maxDuration)
             .SetEase(Ease.OutBack);
-        cg.DOFade(1f, maxduration);
+        cg.DOFade(1f, maxDuration);
     }
 
     public void HidePanel(RectTransform panel)
     {
         CanvasGroup cg = panel.GetComponent<CanvasGroup>();
 
-        panel.DOScale(0f, maxduration)
+        panel.DOScale(0f, maxDuration)
             .SetEase(Ease.InBack);
-        cg.DOFade(0f, maxduration)
+        cg.DOFade(0f, maxDuration)
             .OnComplete(() =>
             {
                 panel.gameObject.SetActive(false);
@@ -73,26 +74,32 @@ public class UIManager : MonoBehaviour
     {
         Sequence seq = DOTween.Sequence();
 
-        seq.Join(corePanel.DOAnchorPosY(panelPosY, maxduration).SetEase(Ease.InOutCubic));
-        seq.Join(pauseBtn.DOAnchorPosX(pauseBtnPosX, maxduration).SetEase(Ease.InOutCubic));
+        seq.Join(corePanel.DOAnchorPosY(panelPosY, maxDuration).SetEase(Ease.InOutCubic));
+        seq.Join(pauseBtn.DOAnchorPosX(pauseBtnPosX, maxDuration).SetEase(Ease.InOutCubic));
 
         seq.AppendCallback(() =>
         {
             gameManager.NewStat();
-            NewStatUI();
         });
-    }
-
-    void NewStatUI()
-    {
-        ScaleStat(characterDataUI.age.transform);
     }
 
     public void ScaleStat(Transform trans)
     {
         trans.DOKill();
         Sequence seq = DOTween.Sequence();
-        seq.Append(trans.DOScale(1.5f, minDuration));
-        seq.Append(trans.DOScale(1f, maxduration));
+        seq.Append(trans.DOScale(1.2f, maxDuration));
+        seq.Append(trans.DOScale(1f, minDuration));
+    }
+
+    public void ChangeValueUI(int numBe, int numThen,TextMeshProUGUI textM)
+    {
+        DOVirtual.Int(numBe, numThen, 1f, value =>
+        {
+            textM.text = value.ToString();
+            ScaleStat(textM.transform);
+        });
+
+
+        
     }
 }

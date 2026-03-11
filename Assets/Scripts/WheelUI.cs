@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static GameManager;
 using static Unity.Collections.AllocatorManager;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using static UnityEngine.Rendering.DebugUI;
 
 
@@ -22,6 +23,7 @@ public class WheelUI : MonoBehaviour
         public Image image;
         public float startAngle;
         public float endAngle;
+        public int index;
     }
 
     private List<SliceData> slices = new List<SliceData>();
@@ -45,38 +47,37 @@ public class WheelUI : MonoBehaviour
     {
         int rate = Random.Range(1, 100);
         if (rate <= 1)
-            characterData.age = Random.Range(0, 21);
+            gameManager.myCharacterData.age = Random.Range(0, 21);
         else if (rate < 20)
-            characterData.age = Random.Range(21, 51);
+            gameManager.myCharacterData.age = Random.Range(21, 51);
         else if (rate < 90)
-            characterData.age = Random.Range(51, 101);
+            gameManager.myCharacterData.age = Random.Range(51, 101);
         else
-            characterData.age = Random.Range(101, 201);
+            gameManager.myCharacterData.age = Random.Range(101, 201);
 
-        DOVirtual.Int(0, characterData.age, 1f, value =>
-        {
-            uiManager.ageResult.text = value.ToString();
-            uiManager.ScaleStat(uiManager.ageResult.transform);
-        });
+        uiManager.ChangeValueUI(characterData.age, gameManager.myCharacterData.age, uiManager.ageResult);
     }
 
-    public void CreateWheel()
+    public void CreateWheel(RateOption rate)
     {
-        RateOption rate = gameManager.rateOption;
+        slices.Clear();
 
+
+        //RateOption rate = gameManager.rateOption;
+        
+
+        uiManager.optionPanel.gameObject.SetActive(true);
         uiManager.titleOption.gameObject.SetActive(true);
         uiManager.titleOption.text = rate.title;
         
 
-        //xep thu tu va tinh tong
-        slices.Clear();
 
 
         rate.items = rate.items.OrderByDescending(item => item.weight).ToList();
         _totalWeight = rate.items.Sum(item => item.weight);
 
         //thong so goc
-        int index = 0;
+        int i = 0;
         wheelRadian = 0;
 
         foreach (var item in rate.items)
@@ -84,25 +85,29 @@ public class WheelUI : MonoBehaviour
             float rateValue = item.weight / _totalWeight;
 
             //fill amount
-            Image img = uiManager.fillObject[index].GetComponent<Image>();
+            Image img = uiManager.fillObject[i].GetComponent<Image>();
             img.fillAmount = rateValue;
-            uiManager.fillObject[index].SetActive(true);
-            img.color = uiManager.colors[index % uiManager.colors.Length];
+            uiManager.fillObject[i].SetActive(true);
+            img.color = uiManager.colors[i % uiManager.colors.Length];
 
-            uiManager.fillObject[index].transform.rotation = Quaternion.Euler(0, 0, wheelRadian);
+            uiManager.fillObject[i].transform.rotation = Quaternion.Euler(0, 0, wheelRadian);
 
             float sliceAngle = rateValue * radian; //scale => 360
+
+            float start = Mathf.Repeat(wheelRadian, -radian);
+            float end = Mathf.Repeat(wheelRadian + sliceAngle, -radian);
 
             slices.Add(new SliceData
             {
                 image = img,
                 endAngle = wheelRadian,
-                startAngle = wheelRadian + sliceAngle
+                startAngle = wheelRadian + sliceAngle,
+                index = i
             });
 
             wheelRadian += sliceAngle;
 
-            index++;
+            i++;
         }
     }
 
@@ -111,7 +116,7 @@ public class WheelUI : MonoBehaviour
         float randomAngle = Random.Range(0f, 3600f);
 
         uiManager.arrow
-        .DORotate(new Vector3(0, 0, randomAngle), 4f, RotateMode.FastBeyond360)
+        .DORotate(new Vector3(0, 0, 3600f + randomAngle), 4f, RotateMode.FastBeyond360)
         .SetEase(Ease.OutCubic)
         .OnUpdate(CheckSlice)
         .OnComplete(GetResult); ;
@@ -162,10 +167,21 @@ public class WheelUI : MonoBehaviour
 
             if (inside)
             {
-                Debug.Log("Result: " + slice.image.name);
+                int index = slice.index;
+
+                RewardItem reward = gameManager.rateOption.items[index];
+
+                uiManager.resultOption.text = reward.optionName;
+
+                Debug.Log("Result: " + reward.optionName);
+
+                gameManager.statSystem.ApplyReward(reward);
+
                 return;
             }
         }
+
+        Debug.LogWarning("No slice found for angle: " + angle);
     }
 
 }
