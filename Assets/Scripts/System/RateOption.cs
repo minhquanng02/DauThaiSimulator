@@ -13,8 +13,6 @@ public class RateOption : ScriptableObject
     public string title;
 
     [SerializeField] public List<RewardItem> items;
-
-
 }
     
 
@@ -24,11 +22,11 @@ public class RewardItem
     public string itemName;
     public float weight;
     public string optionName;
-    public List<Stat> statTypes;
+    public List<Stat> stats;
     
 }
 
-public class Stat
+[System.Serializable] public class Stat
 {
     public StatType stat;
     public int value;

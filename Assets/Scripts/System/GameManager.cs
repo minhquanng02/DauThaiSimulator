@@ -19,40 +19,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] public CharacterData myCharacterData;
     [SerializeField] public StatSystem statSystem;
 
-    
-
-    public void NewGame()
-    {
-        NewCharacter();
-
-        uiManager.HideMidPanel();
-
-        uiManager.loadScene.SetActive(true);
-    }
-
-
-
-    public void GameStart()
-    {
-
-        uiManager.ChangeValueUI(character.age, myCharacterData.age, uiManager.ageResult);
-
-
-        uiManager.ShowPanel(uiManager.agePanel);
-    }
-
-    
-
-    //
-    public void ApplyWheelResult(int index)
-    {
-        RewardItem reward = rateOption.items[index];
-
-        Debug.Log("Reward: " + reward.optionName);
-
-        statSystem.ApplyReward(reward);
-    }
-
     public void NewLife()
     {
         wheelUI.CreateWheel(rateOption);
@@ -61,24 +27,41 @@ public class GameManager : MonoBehaviour
 
     public void NewStat()
     {
-        //uiManager.ChangeValueUI(character.age, myCharacterData.age, characterDataUI.age);
-        //characterDataUI.job.text = myCharacterData.job;
-        //.gender.text = myCharacterData.gender;
+        uiManager.ChangeValueUI(character.age, myCharacterData.age, characterDataUI.age);
+        characterDataUI.job.text = myCharacterData.job;
+        characterDataUI.gender.text = myCharacterData.gender;
 
-        //uiManager.ChangeValueUI(character.health, myCharacterData.health, characterDataUI.health);
-        //uiManager.ChangeValueUI(character.appearance, myCharacterData.appearance, characterDataUI.appearance);
-        //uiManager.ChangeValueUI(character.mirrage, myCharacterData.mirrage, characterDataUI.mirrage);
-        //uiManager.ChangeValueUI(character.stress, myCharacterData.stress, characterDataUI.stress);
-        //uiManager.ChangeValueUI(character.discipline, myCharacterData.discipline, characterDataUI.disipline);
-        //uiManager.ChangeValueUI(character.risk, myCharacterData.risk, characterDataUI.risk);
-        //uiManager.ChangeValueUI(character.iq, myCharacterData.iq, characterDataUI.iq);
-        //uiManager.ChangeValueUI(character.eq, myCharacterData.eq, characterDataUI.eq);
-        //uiManager.ChangeValueUI(character.finance, myCharacterData.finance, characterDataUI.finance);
-        //uiManager.ChangeValueUI(character.social, myCharacterData.social, characterDataUI.social);
-        //uiManager.ChangeValueUI(character.reputation, myCharacterData.reputation, characterDataUI.reputation);
-        //uiManager.ChangeValueUI(character.debt, myCharacterData.debt, characterDataUI.dept);
+        uiManager.ChangeValueUI(character.health, myCharacterData.health, characterDataUI.health);
+        uiManager.ChangeValueUI(character.appearance, myCharacterData.appearance, characterDataUI.appearance);
+        uiManager.ChangeValueUI(character.mirrage, myCharacterData.mirrage, characterDataUI.mirrage);
+        uiManager.ChangeValueUI(character.stress, myCharacterData.stress, characterDataUI.stress);
+        uiManager.ChangeValueUI(character.discipline, myCharacterData.discipline, characterDataUI.disipline);
+        uiManager.ChangeValueUI(character.risk, myCharacterData.risk, characterDataUI.risk);
+        uiManager.ChangeValueUI(character.iq, myCharacterData.iq, characterDataUI.iq);
+        uiManager.ChangeValueUI(character.eq, myCharacterData.eq, characterDataUI.eq);
+        uiManager.ChangeValueUI(character.finance, myCharacterData.finance, characterDataUI.finance);
+        uiManager.ChangeValueUI(character.social, myCharacterData.social, characterDataUI.social);
+        uiManager.ChangeValueUI(character.reputation, myCharacterData.reputation, characterDataUI.reputation);
+        uiManager.ChangeValueUI(character.debt, myCharacterData.debt, characterDataUI.dept);
     }
 
+    //UI tao tuoi tho
+    public void GameStart()
+    {
+        uiManager.ChangeValueUI(character.age, myCharacterData.age, uiManager.ageResult);
+
+        uiManager.ShowPanel(uiManager.agePanel);
+    }
+
+    //Bam choi lai
+    public void NewGame()
+    {
+        NewCharacter();
+
+        uiManager.HideMidPanel();
+
+        uiManager.loadScene.SetActive(true);
+    }
 
     //Tao data moi cho nhan vat
     public void NewCharacter()

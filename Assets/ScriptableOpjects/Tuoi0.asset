@@ -17,9 +17,18 @@ MonoBehaviour:
   - itemName: "Gia \u0111\xECnh lao \u0111\u1ED9ng ngh\xE8o"
     weight: 50
     optionName: "Gia \u0111\xECnh lao \u0111\u1ED9ng ngh\xE8o"
+    stats:
+    - stat: 0
+      value: 10
   - itemName: "Gia \u0111\xECnh trung b\xECnh"
     weight: 35
     optionName: "Gia \u0111\xECnh trung b\xECnh"
-  - itemName: "Gia \u0111\xECnh kh\xE1 gi\u1EA3"
+    stats:
+    - stat: 0
+      value: 20
+  - itemName: "Gia \u0111\xECnh gi\xE0u c\xF3"
     weight: 15
-    optionName: "Gia \u0111\xECnh kh\xE1 gi\u1EA3"
+    optionName: "Gia \u0111\xECnh gi\xE0u c\xF3"
+    stats:
+    - stat: 0
+      value: 30

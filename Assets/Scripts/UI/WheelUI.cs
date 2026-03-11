@@ -32,9 +32,6 @@ public class WheelUI : MonoBehaviour
     private float radian = -360f;
     private float wheelRadian;
     
- 
-
-    
     //Tao vong quay
     public void CreateWheel(RateOption rate)
     {

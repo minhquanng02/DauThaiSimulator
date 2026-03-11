@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class StatSystem : MonoBehaviour
@@ -20,37 +21,39 @@ public class StatSystem : MonoBehaviour
 
         statMap = new Dictionary<StatType, Action<int>>()
         {
+            { StatType.Health, v =>
             {
-                StatType.Health, v =>
-                {
-                    character.health += v;
-                    uiManager.ChangeValueUI(character.health, myCharacterData.health, gameManager.characterDataUI.health);
-            Debug.Log("reward");    
-                }
-            },
-            { StatType.Appearance, v => character.appearance += v },
-            { StatType.Stress, v => character.stress += v },
-            { StatType.Discipline, v => character.discipline += v },
-            { StatType.Risk, v => character.risk += v },
+                myCharacterData.health += v;
+                uiManager.ChangeValueUI(character.health, myCharacterData.health, gameManager.characterDataUI.health);
 
-            { StatType.IQ, v => character.iq += v },
-            { StatType.EQ, v => character.eq += v },
-            { StatType.Finance, v => character.finance += v },
-            { StatType.Social, v => character.social += v },
-            { StatType.Reputation, v => character.reputation += v },
+            }},
+            { StatType.Appearance, v => myCharacterData.appearance += v },
+            { StatType.Stress, v => myCharacterData.stress += v },
+            { StatType.Discipline, v => myCharacterData.discipline += v },
+            { StatType.Risk, v => myCharacterData.risk += v },
 
-            { StatType.Debt, v => character.debt += v },
-            { StatType.Luck, v => character.luck += v }
+            { StatType.IQ, v => charamyCharacterDatater.iq += v },
+            { StatType.EQ, v => myCharacterData.eq += v },
+            { StatType.Finance, v => myCharacterData.finance += v },
+            { StatType.Social, v => myCharacterData.social += v },
+            { StatType.Reputation, v => myCharacterData.reputation += v },
+
+            { StatType.Debt, v => myCharacterData.debt += v },
+            { StatType.Luck, v => myCharacterData.luck += v }
         };
     }
 
     public void ApplyReward(RewardItem reward)
     {
-        foreach (var stat in reward.statTypes)
+        foreach (var stat in reward.stats)
         {
             if (statMap.TryGetValue(stat.stat, out var action))
             {
                 action(stat.value);
+            }
+            else
+            {
+                Debug.LogWarning("Stat không tồn tại: " + stat.stat);
             }
         }
     }
