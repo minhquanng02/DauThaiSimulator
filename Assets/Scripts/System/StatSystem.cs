@@ -32,7 +32,7 @@ public class StatSystem : MonoBehaviour
             { StatType.Discipline, v => myCharacterData.discipline += v },
             { StatType.Risk, v => myCharacterData.risk += v },
 
-            { StatType.IQ, v => charamyCharacterDatater.iq += v },
+            { StatType.IQ, v => myCharacterData.iq += v },
             { StatType.EQ, v => myCharacterData.eq += v },
             { StatType.Finance, v => myCharacterData.finance += v },
             { StatType.Social, v => myCharacterData.social += v },

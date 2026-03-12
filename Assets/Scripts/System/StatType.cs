@@ -2,6 +2,7 @@ using UnityEngine;
 
 public enum StatType
 {
+    MaxAge,
     Health,
     Appearance,
     Stress,

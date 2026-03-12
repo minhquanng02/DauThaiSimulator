@@ -5,6 +5,7 @@ public class CharacterData : MonoBehaviour
     public string characterID;
     [Header("Top")]
     public int age = 0;
+    public int maxAge = 0;
     public string gender;
     public string job;
 

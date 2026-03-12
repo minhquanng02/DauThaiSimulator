@@ -3,6 +3,7 @@ using DG.Tweening.Core.Easing;
 using NUnit.Framework.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -25,9 +26,9 @@ public class GameManager : MonoBehaviour
         wheelUI.SpinArrow();
     }
 
-    public void NewStat()
+    public void ApplyStat()
     {
-        uiManager.ChangeValueUI(character.age, myCharacterData.age, characterDataUI.age);
+        uiManager.ChangeValueUI(character.maxAge, myCharacterData.maxAge, characterDataUI.maxAge);
         characterDataUI.job.text = myCharacterData.job;
         characterDataUI.gender.text = myCharacterData.gender;
 
@@ -48,7 +49,9 @@ public class GameManager : MonoBehaviour
     //UI tao tuoi tho
     public void GameStart()
     {
-        uiManager.ChangeValueUI(character.age, myCharacterData.age, uiManager.ageResult);
+        NewCharacter();
+
+        uiManager.ChangeValueUI(character.maxAge, myCharacterData.maxAge, uiManager.ageResult);
 
         uiManager.ShowPanel(uiManager.agePanel);
     }
@@ -56,15 +59,37 @@ public class GameManager : MonoBehaviour
     //Bam choi lai
     public void NewGame()
     {
-        NewCharacter();
 
         uiManager.HideMidPanel();
 
         uiManager.loadScene.SetActive(true);
+
+        ResetData();
     }
 
-    //Tao data moi cho nhan vat
-    public void NewCharacter()
+    void ResetData()
+    {
+        characterDataUI.age.text = 0.ToString();
+        characterDataUI.maxAge.text = 0.ToString();
+        characterDataUI.gender.text = 0.ToString();
+        characterDataUI.job.text = 0.ToString();
+        characterDataUI.health.text = 0.ToString();
+        characterDataUI.appearance.text = 0.ToString();
+        characterDataUI.mirrage.text = 0.ToString();
+        characterDataUI.stress.text = 0.ToString();
+        characterDataUI.disipline.text = 0.ToString();
+        characterDataUI.risk.text = 0.ToString();
+        characterDataUI.iq.text = 0.ToString();
+        characterDataUI.eq.text = 0.ToString();
+        characterDataUI.finance.text = 0.ToString();
+        characterDataUI.social.text = 0.ToString();
+        characterDataUI.reputation.text = 0.ToString();
+        characterDataUI.dept.text = 0.ToString();
+
+    }
+
+//Tao data moi cho nhan vat
+public void NewCharacter()
     {
         character = new CharacterData();
         myCharacterData = new CharacterData();
@@ -105,13 +130,13 @@ public class GameManager : MonoBehaviour
     {
         int rate = Random.Range(1, 100);
         if (rate <= 1)
-            myCharacterData.age = Random.Range(0, 21);
+            myCharacterData.maxAge = Random.Range(0, 21);
         else if (rate < 20)
-            myCharacterData.age = Random.Range(21, 51);
+            myCharacterData.maxAge = Random.Range(21, 51);
         else if (rate < 90)
-            myCharacterData.age = Random.Range(51, 101);
+            myCharacterData.maxAge = Random.Range(51, 101);
         else
-            myCharacterData.age = Random.Range(101, 201);
+            myCharacterData.maxAge = Random.Range(101, 201);
 
     }
 }

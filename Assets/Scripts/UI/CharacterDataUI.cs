@@ -6,6 +6,7 @@ public class CharacterDataUI : MonoBehaviour
 {
     [Header("Top")]
     public TextMeshProUGUI age;
+    public TextMeshProUGUI maxAge;
     public TextMeshProUGUI gender;
     public TextMeshProUGUI job;
 
