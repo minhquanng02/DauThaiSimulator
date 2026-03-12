@@ -1,9 +1,11 @@
 ﻿using DG.Tweening;
 using DG.Tweening.Core.Easing;
 using NUnit.Framework.Internal;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -11,7 +13,8 @@ using static CharacterData;
 public class GameManager : MonoBehaviour
 {
     [Header("Class")]
-    [SerializeField] public RateOption rateOption;
+    public List<AgeEvent> ageEvents = new List<AgeEvent>();
+
     [SerializeField] private WheelUI wheelUI;
     [SerializeField] private GameObject optionPanel;
     [SerializeField] private UIManager uiManager;
@@ -19,12 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] public CharacterDataUI characterDataUI;
     [SerializeField] public CharacterData myCharacterData;
     [SerializeField] public StatSystem statSystem;
+    [SerializeField] public bool pauseAge = false;
 
-    public void NewLife()
-    {
-        wheelUI.CreateWheel(rateOption);
-        wheelUI.SpinArrow();
-    }
+    Coroutine ageCoroutine;
 
     public void ApplyStat()
     {
@@ -36,20 +36,78 @@ public class GameManager : MonoBehaviour
         uiManager.ChangeValueUI(character.appearance, myCharacterData.appearance, characterDataUI.appearance);
         uiManager.ChangeValueUI(character.mirrage, myCharacterData.mirrage, characterDataUI.mirrage);
         uiManager.ChangeValueUI(character.stress, myCharacterData.stress, characterDataUI.stress);
-        uiManager.ChangeValueUI(character.discipline, myCharacterData.discipline, characterDataUI.disipline);
+        uiManager.ChangeValueUI(character.discipline, myCharacterData.discipline, characterDataUI.discipline);
         uiManager.ChangeValueUI(character.risk, myCharacterData.risk, characterDataUI.risk);
         uiManager.ChangeValueUI(character.iq, myCharacterData.iq, characterDataUI.iq);
         uiManager.ChangeValueUI(character.eq, myCharacterData.eq, characterDataUI.eq);
         uiManager.ChangeValueUI(character.finance, myCharacterData.finance, characterDataUI.finance);
         uiManager.ChangeValueUI(character.social, myCharacterData.social, characterDataUI.social);
         uiManager.ChangeValueUI(character.reputation, myCharacterData.reputation, characterDataUI.reputation);
-        uiManager.ChangeValueUI(character.debt, myCharacterData.debt, characterDataUI.dept);
+        uiManager.ChangeValueUI(character.debt, myCharacterData.debt, characterDataUI.debt);
+
+        ContinueGame();
+        StartAgeLoop();
+    }
+
+
+    //Tang tuoi moi giay
+    void StartAgeLoop()
+    {
+        if (ageCoroutine != null)
+            StopCoroutine(ageCoroutine);
+
+        ageCoroutine = StartCoroutine(AgeLoop());
+    }
+
+    IEnumerator AgeLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.2f);
+
+            if (pauseAge) continue;
+            CheckAgeEvent(myCharacterData.age);
+
+
+            int startAge = myCharacterData.age;
+
+            uiManager.ChangeValueUI(startAge, myCharacterData.age, characterDataUI.age);
+            myCharacterData.age++;
+
+
+        }
+    }
+
+    public void CheckAgeEvent(int age)
+    {
+        foreach (var e in ageEvents)
+        {
+            if (e.age == age)
+            {
+                PauseGame();
+
+                wheelUI.CreateWheel(e.rateOption);
+                wheelUI.SpinArrow();
+                return;
+            }
+        }
+    }
+
+    public void ContinueGame()
+    {
+        pauseAge = false;
+    }
+    public void PauseGame()
+    {
+        pauseAge = true;
     }
 
     //UI tao tuoi tho
     public void GameStart()
     {
         NewCharacter();
+
+        
 
         uiManager.ChangeValueUI(character.maxAge, myCharacterData.maxAge, uiManager.ageResult);
 
@@ -59,15 +117,14 @@ public class GameManager : MonoBehaviour
     //Bam choi lai
     public void NewGame()
     {
-
         uiManager.HideMidPanel();
 
         uiManager.loadScene.SetActive(true);
 
-        ResetData();
+        ResetDataUI();
     }
 
-    void ResetData()
+    void ResetDataUI()
     {
         characterDataUI.age.text = 0.ToString();
         characterDataUI.maxAge.text = 0.ToString();
@@ -77,27 +134,26 @@ public class GameManager : MonoBehaviour
         characterDataUI.appearance.text = 0.ToString();
         characterDataUI.mirrage.text = 0.ToString();
         characterDataUI.stress.text = 0.ToString();
-        characterDataUI.disipline.text = 0.ToString();
+        characterDataUI.discipline.text = 0.ToString();
         characterDataUI.risk.text = 0.ToString();
         characterDataUI.iq.text = 0.ToString();
         characterDataUI.eq.text = 0.ToString();
         characterDataUI.finance.text = 0.ToString();
         characterDataUI.social.text = 0.ToString();
         characterDataUI.reputation.text = 0.ToString();
-        characterDataUI.dept.text = 0.ToString();
-
+        characterDataUI.debt.text = 0.ToString();
     }
 
-//Tao data moi cho nhan vat
-public void NewCharacter()
-    {
-        character = new CharacterData();
-        myCharacterData = new CharacterData();
+    //Tao data moi cho nhan vat
+    public void NewCharacter()
+        {
+            character = new CharacterData();
+            myCharacterData = new CharacterData();
 
-        statSystem = new StatSystem(character, myCharacterData, uiManager);
+            statSystem = new StatSystem(character, myCharacterData, uiManager, this);
 
-        NewChaData();
-    }
+            NewChaData();
+        }
 
     void NewChaData()
     {

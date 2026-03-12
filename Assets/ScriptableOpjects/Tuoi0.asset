@@ -15,20 +15,24 @@ MonoBehaviour:
   title: "B\u1EA1n sinh ra trong gia \u0111\xECnh"
   items:
   - itemName: "Gia \u0111\xECnh lao \u0111\u1ED9ng ngh\xE8o"
-    weight: 50
+    weight: 45
     optionName: "Gia \u0111\xECnh lao \u0111\u1ED9ng ngh\xE8o"
     stats:
-    - stat: 0
-      value: 10
+    - stat: 8
+      value: -30
+    - stat: 3
+      value: 40
   - itemName: "Gia \u0111\xECnh trung b\xECnh"
-    weight: 35
+    weight: 40
     optionName: "Gia \u0111\xECnh trung b\xECnh"
     stats:
-    - stat: 0
+    - stat: 3
       value: 20
   - itemName: "Gia \u0111\xECnh gi\xE0u c\xF3"
     weight: 15
     optionName: "Gia \u0111\xECnh gi\xE0u c\xF3"
     stats:
-    - stat: 0
-      value: 30
+    - stat: 8
+      value: 40
+    - stat: 3
+      value: 40

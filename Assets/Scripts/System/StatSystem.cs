@@ -12,34 +12,105 @@ public class StatSystem : MonoBehaviour
 
     Dictionary<StatType, Action<int>> statMap;
 
-    public StatSystem(CharacterData data, CharacterData baseData, UIManager ui)
+    public StatSystem(CharacterData data, CharacterData baseData, UIManager ui, GameManager gm)
     {
         
         character = data;
         myCharacterData = baseData;
         uiManager = ui;
+        gameManager = gm;
 
         statMap = new Dictionary<StatType, Action<int>>()
         {
+            { StatType.MaxAge, v =>
+            {
+                int i = myCharacterData.maxAge;
+                myCharacterData.maxAge += v;
+                uiManager.ChangeValueUI(i, myCharacterData.maxAge, gameManager.characterDataUI.maxAge);
+            }},
             { StatType.Health, v =>
             {
+                int i = myCharacterData.health;
                 myCharacterData.health += v;
-                uiManager.ChangeValueUI(character.health, myCharacterData.health, gameManager.characterDataUI.health);
+                uiManager.ChangeValueUI(i, myCharacterData.health, gameManager.characterDataUI.health);
+            }},
+            { StatType.Appearance, v =>
+            {
+                int i = myCharacterData.appearance;
+                myCharacterData.appearance += v;
+                uiManager.ChangeValueUI(i, myCharacterData.appearance, gameManager.characterDataUI.appearance);
+            }},
+            { StatType.Stress, v =>
+            {
+                int i = myCharacterData.stress;
+                myCharacterData.stress += v;
+                uiManager.ChangeValueUI(i, myCharacterData.stress, gameManager.characterDataUI.stress);
 
             }},
-            { StatType.Appearance, v => myCharacterData.appearance += v },
-            { StatType.Stress, v => myCharacterData.stress += v },
-            { StatType.Discipline, v => myCharacterData.discipline += v },
-            { StatType.Risk, v => myCharacterData.risk += v },
+            { StatType.Discipline, v =>
+            {
+                int i = myCharacterData.discipline;
+                myCharacterData.discipline += v;
+                uiManager.ChangeValueUI(i, myCharacterData.discipline, gameManager.characterDataUI.discipline);
 
-            { StatType.IQ, v => myCharacterData.iq += v },
-            { StatType.EQ, v => myCharacterData.eq += v },
-            { StatType.Finance, v => myCharacterData.finance += v },
-            { StatType.Social, v => myCharacterData.social += v },
-            { StatType.Reputation, v => myCharacterData.reputation += v },
+            }},
+            { StatType.Risk, v =>
+            {
+                int i = myCharacterData.risk;
+                myCharacterData.risk += v;
+                uiManager.ChangeValueUI(i, myCharacterData.risk, gameManager.characterDataUI.risk);
 
-            { StatType.Debt, v => myCharacterData.debt += v },
-            { StatType.Luck, v => myCharacterData.luck += v }
+            }},
+
+            { StatType.IQ, v =>
+            {
+                int i = myCharacterData.iq;
+                myCharacterData.iq += v;
+                uiManager.ChangeValueUI(i, myCharacterData.iq, gameManager.characterDataUI.iq);
+
+            }},
+            { StatType.EQ, v =>
+            {
+                int i = myCharacterData.eq;
+                myCharacterData.eq += v;
+                uiManager.ChangeValueUI(i, myCharacterData.eq, gameManager.characterDataUI.eq);
+
+            }},
+            { StatType.Finance, v =>
+            {
+                int i = myCharacterData.finance;
+                myCharacterData.finance += v;
+                uiManager.ChangeValueUI(i, myCharacterData.finance, gameManager.characterDataUI.finance);
+
+            }},
+            { StatType.Social, v =>
+            {
+                int i = myCharacterData.social;
+                myCharacterData.social += v;
+                uiManager.ChangeValueUI(i, myCharacterData.social, gameManager.characterDataUI.social);
+
+            }},
+            { StatType.Reputation, v =>
+            {
+                int i = myCharacterData.reputation;
+                myCharacterData.reputation += v;
+                uiManager.ChangeValueUI(i, myCharacterData.reputation, gameManager.characterDataUI.reputation);
+
+            }},
+
+            { StatType.Debt, v =>
+            {
+                int i = myCharacterData.debt;
+                myCharacterData.debt += v;
+                uiManager.ChangeValueUI(i, myCharacterData.debt, gameManager.characterDataUI.debt);
+
+            }},
+            { StatType.Luck, v =>
+            {
+                int i = myCharacterData.luck;
+                myCharacterData.luck += v;
+                //uiManager.ChangeValueUI(i, myCharacterData.luck, gameManager.characterDataUI.luck);
+            }}
         };
     }
 

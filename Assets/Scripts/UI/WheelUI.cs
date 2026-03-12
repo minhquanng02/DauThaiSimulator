@@ -31,22 +31,19 @@ public class WheelUI : MonoBehaviour
     private float _totalWeight;
     private float radian = -360f;
     private float wheelRadian;
+
+    private RateOption currentRate;
     
     //Tao vong quay
     public void CreateWheel(RateOption rate)
     {
+        currentRate = rate;
         slices.Clear();
-
-
-        //RateOption rate = gameManager.rateOption;
-        
 
         uiManager.optionPanel.gameObject.SetActive(true);
         uiManager.titleOption.gameObject.SetActive(true);
+        uiManager.conBtn.gameObject.SetActive(false);
         uiManager.titleOption.text = rate.title;
-        
-
-
 
         rate.items = rate.items.OrderByDescending(item => item.weight).ToList();
         _totalWeight = rate.items.Sum(item => item.weight);
@@ -54,6 +51,11 @@ public class WheelUI : MonoBehaviour
         //thong so goc
         int i = 0;
         wheelRadian = 0;
+
+        for (int j = 0; j < uiManager.fillObject.Count; j++)
+        {
+            uiManager.fillObject[j].SetActive(false);
+        }
 
         foreach (var item in rate.items)
         {
@@ -95,38 +97,57 @@ public class WheelUI : MonoBehaviour
         .DORotate(new Vector3(0, 0, 3600f + randomAngle), 4f, RotateMode.FastBeyond360)
         .SetEase(Ease.OutCubic)
         .OnUpdate(CheckSlice)
-        .OnComplete(GetResult); ;
+        .OnComplete(() =>
+        {
+            GetResult();
+            uiManager.conBtn.SetActive(true);
+
+        });
+
     }
 
     //Kiem tra vi tri mui ten
     void CheckSlice()
     {
-        RateOption rate = gameManager.rateOption;
+        if (currentRate == null) return;
 
         float angle = -uiManager.arrow.eulerAngles.z;
 
         for (int i = 0; i < slices.Count; i++)
+    {
+        var slice = slices[i];
+
+        bool inside;
+
+        if (slice.startAngle < slice.endAngle)
         {
-            var slice = slices[i];
-
-            if (angle >= slice.startAngle && angle < slice.endAngle)
-            {
-                slice.image.transform.DOScale(1.1f, 0.1f);
-                slice.image.DOFade(0.5f, 0.1f);
-
-                uiManager.resultOption.text = rate.items[i].optionName;
-            }
-            else
-            {
-                slice.image.transform.DOScale(1f, 0.1f);
-                slice.image.DOFade(1f, 0.1f);
-            }
+            inside = angle >= slice.startAngle && angle < slice.endAngle;
         }
+        else
+        {
+            inside = angle >= slice.startAngle || angle < slice.endAngle;
+        }
+
+        if (inside)
+        {
+            slice.image.transform.DOScale(1.1f, 0.1f);
+            slice.image.DOFade(0.5f, 0.1f);
+
+            uiManager.resultOption.text = currentRate.items[slice.index].optionName;
+        }
+        else
+        {
+            slice.image.transform.DOScale(1f, 0.1f);
+            slice.image.DOFade(1f, 0.1f);
+        }
+    }
     }
 
     //Bao ket qua khi quay  xong
     void GetResult()
     {
+        if (currentRate == null) return;
+
         float angle = -uiManager.arrow.eulerAngles.z;
 
         foreach (var slice in slices)
@@ -144,9 +165,7 @@ public class WheelUI : MonoBehaviour
 
             if (inside)
             {
-                int index = slice.index;
-
-                RewardItem reward = gameManager.rateOption.items[index];
+                RewardItem reward = currentRate.items[slice.index];
 
                 uiManager.resultOption.text = reward.optionName;
 

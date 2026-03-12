@@ -10,22 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7acf595c99e4e43a3b2ae3f4de0f42, type: 3}
-  m_Name: Test
+  m_Name: Tuoi3
   m_EditorClassIdentifier: Assembly-CSharp::RateOption
-  _items:
-  - itemName: 
-    weight: 0.5
-  - itemName: 
-    weight: 0.5
-  - itemName: 
-    weight: 0.5
-  - itemName: 
-    weight: 0.5
-  - itemName: 
-    weight: 0.5
-  - itemName: 
-    weight: 0.5
-  - itemName: 
-    weight: 0.5
-  - itemName: 
-    weight: 0.5
+  title: "B\u1EA1n h\u1ECDc \u0111\u01B0\u1EE3c v\xE0i th\u1EE9"
+  items:
+  - itemName: "T\u1EF1 ch\u01A1i \u1EDF nh\xE0"
+    weight: 50
+    optionName: "T\u1EF1 ch\u01A1i \u1EDF nh\xE0"
+    stats:
+    - stat: 4
+      value: 10
+  - itemName: "Qua nh\xE0 b\u1EA1n ch\u01A1i"
+    weight: 50
+    optionName: "Qua nh\xE0 b\u1EA1n ch\u01A1i"
+    stats:
+    - stat: 9
+      value: 10

@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform corePanel;
     [SerializeField] private RectTransform pauseBtn;
     [SerializeField] public GameObject loadScene;
+    [SerializeField] public GameObject conBtn;
 
     private float endPanelPosY = 220f; 
     private float endPauseBtnPosX = -96f; 

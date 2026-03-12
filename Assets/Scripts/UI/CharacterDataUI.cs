@@ -15,7 +15,7 @@ public class CharacterDataUI : MonoBehaviour
     public TextMeshProUGUI appearance;
     public TextMeshProUGUI mirrage;
     public TextMeshProUGUI stress;
-    public TextMeshProUGUI disipline;
+    public TextMeshProUGUI discipline;
     public TextMeshProUGUI risk;
 
     [Header("Right")]
@@ -24,7 +24,7 @@ public class CharacterDataUI : MonoBehaviour
     public TextMeshProUGUI finance;
     public TextMeshProUGUI social;
     public TextMeshProUGUI reputation;
-    public TextMeshProUGUI dept;
+    public TextMeshProUGUI debt;
 
    
 }
