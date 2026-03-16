@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameManager;
@@ -169,7 +168,7 @@ public class WheelUI : MonoBehaviour
 
                 uiManager.resultOption.text = reward.optionName;
 
-                Debug.Log("Result: " + reward.optionName);
+                //Debug.Log("Result: " + reward.optionName);
 
                 gameManager.statSystem.ApplyReward(reward);
 

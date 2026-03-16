@@ -19,9 +19,8 @@ public class RateOption : ScriptableObject
 [System.Serializable]
 public class RewardItem
 {
-    public string itemName;
-    public float weight;
     public string optionName;
+    public float weight;
     public List<Stat> stats;
     
 }

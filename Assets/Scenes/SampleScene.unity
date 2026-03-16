@@ -3334,7 +3334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   ageEvents:
   - {fileID: 11400000, guid: 913e8cbfa810d7146ab00831fdcc9903, type: 2}
-  - {fileID: 11400000, guid: dceca969c4d3a59469ac2b33b369f987, type: 2}
+  - {fileID: 11400000, guid: d09c05a9d51c54a4ebcf317028077a99, type: 2}
+  - {fileID: 11400000, guid: 9a3d4d20429cc9a438e2e92301cac9ae, type: 2}
   wheelUI: {fileID: 876005673}
   optionPanel: {fileID: 1859402299}
   uiManager: {fileID: 1483428125}
