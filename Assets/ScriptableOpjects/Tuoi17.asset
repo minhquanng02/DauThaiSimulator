@@ -10,20 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7acf595c99e4e43a3b2ae3f4de0f42, type: 3}
-  m_Name: Tuoi7
+  m_Name: Tuoi17
   m_EditorClassIdentifier: Assembly-CSharp::RateOption
-  title: "B\u1EA1n h\u1ECDc ti\u1EC3u h\u1ECDc"
+  title: "B\u1EA1n t\u1ECF t\xECnh m\u1ED1i t\xECnh \u0111\u1EA7u"
   items:
-  - optionName: "H\u1ECDc sinh gi\u1ECFi"
+  - optionName: "Th\xE0nh c\xF4ng"
     weight: 10
     stats:
-    - stat: 6
+    - stat: 10
       value: 10
-  - optionName: "Trung b\xECnh"
-    weight: 10
-    stats: []
-  - optionName: "H\u1ECDc k\xE9m"
+  - optionName: "B\u1ECB t\u1EEB ch\u1ED1i"
     weight: 10
     stats:
-    - stat: 4
-      value: -10
+    - stat: 3
+      value: 10
+  - optionName: Chia tay drama
+    weight: 10
+    stats:
+    - stat: 3
+      value: 15
+    - stat: 5
+      value: 5

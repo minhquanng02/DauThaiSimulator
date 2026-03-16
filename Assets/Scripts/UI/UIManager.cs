@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     [Header("Core UI")]
     [SerializeField] private RectTransform corePanel;
     [SerializeField] private RectTransform pauseBtn;
+    [SerializeField] public RectTransform deadPanel;
     [SerializeField] public GameObject loadScene;
     [SerializeField] public GameObject conBtn;
 

@@ -10,20 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7acf595c99e4e43a3b2ae3f4de0f42, type: 3}
-  m_Name: Tuoi7
+  m_Name: Tuoi75
   m_EditorClassIdentifier: Assembly-CSharp::RateOption
-  title: "B\u1EA1n h\u1ECDc ti\u1EC3u h\u1ECDc"
+  title: "B\u1EA1n b\u1ECB"
   items:
-  - optionName: "H\u1ECDc sinh gi\u1ECFi"
-    weight: 10
+  - optionName: Suy tim
+    weight: 1
     stats:
-    - stat: 6
-      value: 10
-  - optionName: "Trung b\xECnh"
-    weight: 10
-    stats: []
-  - optionName: "H\u1ECDc k\xE9m"
-    weight: 10
+    - stat: 0
+      value: -200
+  - optionName: "Ung th\u01B0"
+    weight: 1
     stats:
-    - stat: 4
-      value: -10
+    - stat: 0
+      value: -200
+  - optionName: "\u0110\u1ED9t qu\u1EF5"
+    weight: 1
+    stats:
+    - stat: 0
+      value: -200
+  - optionName: "Tai n\u1EA1n"
+    weight: 1
+    stats:
+    - stat: 0
+      value: -200

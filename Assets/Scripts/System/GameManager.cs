@@ -79,6 +79,9 @@ public class GameManager : MonoBehaviour
 
     public void CheckAgeEvent(int age)
     {
+        if (age >= myCharacterData.maxAge)
+            OnDead();
+
         foreach (var e in ageEvents)
         {
             if (e.age == age)
@@ -90,6 +93,12 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
+    }
+
+    void OnDead()
+    {
+        PauseGame();
+        uiManager.ShowPanel(uiManager.deadPanel);
     }
 
     public void ContinueGame()
